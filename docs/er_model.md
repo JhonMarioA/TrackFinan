@@ -1,95 +1,109 @@
-# Modelo Entidad Relación (ER)
+# Entity-Relationship (ER) Model
 
-El modelo ER para la aplicación de gestión financiera personal incluye las siguientes entidades y relaciones:
+The ER model for the personal financial management application includes the following entities and relationships:
 
-**Entidades Principales**:
+**Main Entities**:
 
-1) Usuario 
-2) Cuenta 
-3) Transacción 
-4) Categoría 
-5) Método de Pago 
-6) Tipo de Cuenta 
-7) Tipo de Transacción 
-8) Presupuesto (límite mensual por categoría)
+1) User
+2) Account
+3) Transaction
+4) Category
+5) Payment Method
+6) Account Type
+7) Transaction Type
+8) Budget (monthly limit per category)
 
-**Relaciones**:
+**Relationships**:
 
-Relaciones clave:
+Key Relationships:
 
-* Usuario 1:N Cuenta
-* Usuario 1:N Categoría
-* Usuario 1:N MétodoPago
-* Cuenta 1:N Transacción
-* Categoría 1:N Transacción
-* MétodoPago 1:N Transacción
-* TipoCuenta 1:N Cuenta
-* TipoTransacción 1:N Transacción
-* Usuario 1:N Presupuesto
-* Categoría 1:N Presupuesto
+* User 1:N Account
+* User 1:N Category
+* User 1:N Payment Method
+* Account 1:N Transaction
+* Category 1:N Transaction
+* Payment Method 1:N Transaction
+* Account Type 1:N Account
+* Transaction Type 1:N Transaction
+* User 1:N Budget
+* Category 1:N Budget
 
-**Estructura detallada**:
 
-* **Usuario**:
+Usuario
+TipoCuenta
+TipoTransacción
+Categoría
+MétodoPago
+Cuenta
+Transacción
+Presupuesto
 
-        id (PK)
-        name
-        email (UNIQUE)
-        password_hash
-        created_at 
+**Structure**:
 
-* **Cuenta**:
+* user:
 
-        id (PK)
-        user_id (FK → Usuario.id)
-        tipo_cuenta_id (FK → TipoCuenta.id)
-        name
-        balance
-        created_at
+        * id (PK)
+        * name
+        * email (UNIQUE)
+        * password_hash
+        * created_at
 
-* **TipoCuenta (catálogo)**: 
+* account_type:
 
-        id (PK)
-        name  // ahorro, corriente, efectivo, etc.
+        * id (PK)
+        * name (UNIQUE)
 
-* **Transacción (nucleo)**:
+* account:
 
-        id (PK)
-        account_id (FK → Cuenta.id)
-        category_id (FK → Categoría.id)
-        payment_method_id (FK → MétodoPago.id)
-        tipo_transaccion_id (FK → TipoTransacción.id)
+        * id (PK)
+        * user_id (FK → user.id)
+        * type_id (FK → account_type.id)
+        * name
+        * balance
+        * created_at
 
-        amount
-        description
-        created_at
+* transaction_type:
 
-* **TipoTransacción (catálogo)**:
+        * id (PK)
+        * name (UNIQUE) (ej: income, expense)   
 
-        id (PK)
-        name  // income, expense
+* payment_method:
 
-* **Categoría**:
+        * id (PK)
+        * user_id (FK → user.id)
+        * name 
 
-        id (PK)
-        user_id (FK → Usuario.id)  // null si es global
-        name
-        tipo_transaccion_id (FK → TipoTransacción.id)
+        UNIQUE (user_id, name)
 
-* **Método de Pago**:
 
-        id (PK)
-        user_id (FK → Usuario.id)
-        name
+* category:
 
-* **Presupuesto**:
+        * id (PK)
+        * user_id (FK → user.id) (NULLABLE)
+        * name 
+        * transaction_type_id (FK → transaction_type.id)
 
-        id (PK)
-        user_id (FK → Usuario.id)
-        category_id (FK → Categoría.id)
+        UNIQUE (user_id, name)
 
-        amount_limit
-        month   // 1-12
-        year
+* budget:
 
-        created_at
+        * id (PK)
+        * user_id (FK → user.id)
+        * category_id (FK → category.id)
+        * amount
+        * month
+        * year
+        * created_at
+
+        UNIQUE (user_id, category_id, month, year)
+
+* transaction:
+
+        * id (PK)
+        * account_id (FK → account.id)
+        * category_id (FK → category.id)
+        * payment_method_id (FK → payment_method.id)
+        * amount
+        * description
+        * created_at
+
