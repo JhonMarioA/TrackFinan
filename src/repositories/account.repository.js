@@ -3,7 +3,7 @@ const db = require("../config/db")
 const createAccount = async (userId, typeId, name) =>{
 
     const [result] = await db.execute(
-        `INSER INTO account (user_id, type_id, name) VALUES (?, ?, ?)`,
+        `INSERT INTO account (user_id, type_id, name) VALUES (?, ?, ?)`,
         [userId, typeId, name]
     );
     return result.insertId;
@@ -13,9 +13,10 @@ const createAccount = async (userId, typeId, name) =>{
 const getAccountsByUser = async (userId) => {
 
     const [rows] = await db.execute(
-        `SELECT * FROM account WHERE id=?`,
+        `SELECT * FROM account WHERE user_id=?`,
         [userId]
     );
+    // console.log(userId, rows);
     return rows;
 };
 
@@ -45,11 +46,27 @@ const deleteAccount = async (id) => {
     );
 }
 
+const getAccountTypes = async () => {
+
+    const [rows] = await db.execute(
+        `SELECT * FROM account_type`
+    );
+    return rows;
+};
+
+const getTransactionTypes = async () => {
+    const [rows] = await db.execute(
+        `SELECT * FROM transaction_type`
+    );
+    return rows;
+};
 
 module.exports = {
     createAccount,
     getAccountsByUser,  
     getAccountById,
     updateAccount,
-    deleteAccount
+    deleteAccount,
+    getAccountTypes,
+    getTransactionTypes
 };

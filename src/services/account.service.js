@@ -31,10 +31,20 @@ const deleteAccount = async (userId, accountId) => {
     await accountRepo.deleteAccount(accountId); 
 };
 
+const getAccountTypes = async () => {
+    return await accountRepo.getAccountTypes();
+};
+
+const getTransactionTypes = async () => {
+    return await accountRepo.getTransactionTypes();
+};
+
 
 module.exports = {
     createAccount,
     getAccounts,
     updateAccount,
-    deleteAccount
+    deleteAccount,
+    getAccountTypes,
+    getTransactionTypes
 };

@@ -228,3 +228,9 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+
+-- Table Catalog:
+
+INSERT INTO account_type (name) VALUES ('cash'), ('bank'), ('credit_card');
+INSERT INTO transaction_type (name) VALUES ('income'), ('expense');

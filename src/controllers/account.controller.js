@@ -3,7 +3,7 @@ const accountService = require('../services/account.service');
 const createAccount = async (req, res) => {
 
     try{
-        const { userId } = req.params;
+        const userId = req.user.userId;
         const { type_id, name } = req.body;
 
         const id = await accountService.createAccount(userId, type_id, name);
@@ -56,9 +56,31 @@ const deleteAccount = async (req, res) => {
     }
 };
 
+const getAccountTypes = async (req, res) => {
+
+    try{
+        const types = await accountService.getAccountTypes();
+        res.json(types);
+    } catch(err){
+        res.status(400).json({error: err.message})
+    } 
+};
+
+const getTransactionTypes = async (req, res) => {
+    try{
+        const types = await accountService.getTransactionTypes();
+        res.json(types);
+    } catch(err){
+        res.status(400).json({error: err.message})
+    }
+};
+
+
 module.exports = {
     createAccount,
     getAccounts,
     updateAccount,
-    deleteAccount
+    deleteAccount,
+    getAccountTypes,
+    getTransactionTypes
 };

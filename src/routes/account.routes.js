@@ -9,5 +9,7 @@ router.post('/', accountController.createAccount);
 router.get('/', accountController.getAccounts);
 router.put('/:id', accountController.updateAccount);
 router.delete('/:id', accountController.deleteAccount);
+router.get('/account-types', accountController.getAccountTypes);
+router.get('/transaction-types', accountController.getTransactionTypes);
 
 module.exports = router;
