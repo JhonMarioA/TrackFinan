@@ -4,6 +4,7 @@ const app = express();
 const authRoutes = require('./routes/auth.routes');
 const accountRoutes = require('./routes/account.routes');
 const categoryRoutes = require('./routes/category.routes');
+const paymentMethodRoutes = require('./routes/paymentMethod.routes');
 
 require('dotenv').config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/accounts', accountRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/payment-methods', paymentMethodRoutes);
 
 app.get('/', (req, res) => {
     res.send("Welcome to TrackFinan API");
