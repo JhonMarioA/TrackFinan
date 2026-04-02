@@ -40,10 +40,36 @@ const deleteBudget = async (budgetId) => {
     );
 };
 
+
+const getBudgetStatus = async (userId) => {
+  const [rows] = await db.execute(
+    `SELECT 
+        b.id,
+        c.name AS category,
+        b.amount AS limit_amount,
+        COALESCE(SUM(t.amount), 0) AS spent,
+        (b.amount - COALESCE(SUM(t.amount), 0)) AS remaining,
+        ROUND((COALESCE(SUM(t.amount), 0) / b.amount) * 100, 2) AS percentage
+     FROM budget b
+     JOIN category c ON b.category_id = c.id
+     LEFT JOIN transactions t 
+        ON t.category_id = b.category_id
+        AND MONTH(t.created_at) = b.month
+        AND YEAR(t.created_at) = b.year
+     JOIN transaction_type tt ON c.transaction_type_id = tt.id
+     WHERE b.user_id = ?
+       AND tt.name = 'expense'
+     GROUP BY b.id`,
+    [userId]
+  );
+  return rows;
+};
+
 module.exports = {
     createBudget,
     getBudgetsByUserId,
     getBudgetById,
     updateBudget,
-    deleteBudget
+    deleteBudget,
+    getBudgetStatus
 };

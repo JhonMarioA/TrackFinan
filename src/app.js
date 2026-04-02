@@ -6,6 +6,7 @@ const accountRoutes = require('./routes/account.routes');
 const categoryRoutes = require('./routes/category.routes');
 const paymentMethodRoutes = require('./routes/paymentMethod.routes');
 const transactionRoutes = require('./routes/transaction.routes');
+const budgetRoutes = require('./routes/budget.routes');
 
 require('dotenv').config();
 
@@ -18,6 +19,7 @@ app.use('/api/accounts', accountRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/payment-methods', paymentMethodRoutes);
 app.use('/api/transactions', transactionRoutes);
+app.use('/api/budgets', budgetRoutes);
 
 app.get('/', (req, res) => {
     res.send("Welcome to TrackFinan API");
