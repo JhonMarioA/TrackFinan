@@ -92,9 +92,14 @@ const deleteTransaction = async (userId, transactionId) => {
     return await transactionRepo.deleteTransaction(transactionId);
 };
 
+const findWithFilters = async (userId, filters) => {
+    return await transactionRepo.findWithFilters(userId, filters);
+};
+
 module.exports = {
     createTransaction,
     getTransactions,
     updateTransaction,
-    deleteTransaction
+    deleteTransaction,
+    findWithFilters
 };

@@ -48,9 +48,21 @@ const deleteTransaction = async (req, res) => {
     }
 };
 
+const findWithFilters = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const data = await transactionService.findWithFilters(userId, req.query);
+
+    res.json(data);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
 module.exports = {
     createTransaction,
     getTransactions,
     updateTransaction,
-    deleteTransaction
+    deleteTransaction,
+    findWithFilters
 };

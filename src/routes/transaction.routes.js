@@ -9,5 +9,6 @@ router.post('/', transactionController.createTransaction);
 router.get('/', transactionController.getTransactions);
 router.put('/:id', transactionController.updateTransaction);
 router.delete('/:id', transactionController.deleteTransaction);
+router.get('/filter', transactionController.findWithFilters);
 
 module.exports = router;

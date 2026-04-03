@@ -51,10 +51,62 @@ const deleteTransaction = async (transactionId) => {
     );
 };
 
+
+// exp v1
+
+const findWithFilters = async (userId, filters) => {
+  let query = `
+    SELECT t.*
+    FROM transactions t
+    JOIN account a ON t.account_id = a.id
+    WHERE a.user_id = ?
+  `;
+
+  const params = [userId];
+
+  //  date filter
+  if (filters.startDate) {
+    query += ` AND t.created_at >= ?`;
+    params.push(filters.startDate);
+  }
+
+  if (filters.endDate) {
+    query += ` AND t.created_at <= ?`;
+    params.push(filters.endDate);
+  }
+
+  // category
+  if (filters.categoryId) {
+    query += ` AND t.category_id = ?`;
+    params.push(filters.categoryId);
+  }
+
+  // order
+  query += ` ORDER BY t.created_at ${filters.sort === 'asc' ? 'ASC' : 'DESC'}`;
+
+  // pagination
+  const limit = parseInt(filters.limit) || 10;
+  const page = parseInt(filters.page) || 1;
+  const offset = (page - 1) * limit;
+
+  query += ` LIMIT ? OFFSET ?`;
+  params.push(limit, offset);
+
+  const [rows] = await db.execute(query, params);
+  return rows;
+
+  // GET /api/transactions?startDate=2026-04-01&endDate=2026-04-30
+  // GET /api/transactions?categoryId=2
+  // GET /api/transactions?page=2&limit=5
+
+};
+
+
 module.exports = {
     createTransaction,
     findTransactionsByUserId,
     findTransactionById,
     updateTransaction,
-    deleteTransaction
+    deleteTransaction,
+    findWithFilters
 };
