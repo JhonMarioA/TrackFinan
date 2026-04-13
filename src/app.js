@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 
 const authRoutes = require('./routes/auth.routes');
@@ -12,8 +13,10 @@ const reportsRoutes = require('./utils/reports');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3000;
+const FRONTEND_DIR = path.join(__dirname, '..', 'frontend');
 
 app.use(express.json());
+app.use(express.static(FRONTEND_DIR));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/accounts', accountRoutes);
@@ -24,7 +27,7 @@ app.use('/api/budgets', budgetRoutes);
 app.use('/api/reports', reportsRoutes);
 
 app.get('/', (req, res) => {
-    res.send("Welcome to TrackFinan API");
+    res.sendFile(path.join(FRONTEND_DIR, 'index.html'));
 });
 
 app.listen(PORT, () => {

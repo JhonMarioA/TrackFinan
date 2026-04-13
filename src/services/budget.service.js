@@ -21,7 +21,7 @@ const getBudgetsByUserId = async (userId) => {
     return await budgetRepo.getBudgetsByUserId(userId);
 };
 
-const updateBudget = async (budgetId, amount) => {
+const updateBudget = async (userId, budgetId, amount) => {
 
     const budget = await budgetRepo.getBudgetById(budgetId);
     if (!budget) throw new Error("Budget not found");
@@ -31,7 +31,7 @@ const updateBudget = async (budgetId, amount) => {
     await budgetRepo.updateBudget(budgetId, amount);
 };
 
-const deleteBudget = async (budgetId) => {
+const deleteBudget = async (userId, budgetId) => {
     const budget = await budgetRepo.getBudgetById(budgetId);
 
     if (!budget) throw new Error("Budget not found");

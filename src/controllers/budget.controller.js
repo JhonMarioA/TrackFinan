@@ -21,9 +21,10 @@ const getBudgets = async (req, res) => {
 
 const updateBudget = async (req, res) => {
     try {
+        const userId = req.user.userId;
         const budgetId = req.params.id;
         const { amount } = req.body;
-        await budgetService.updateBudget(budgetId, amount);
+        await budgetService.updateBudget(userId, budgetId, amount);
         res.json({ message: "Budget updated successfully" });
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -32,8 +33,9 @@ const updateBudget = async (req, res) => {
 
 const deleteBudget = async (req, res) => {
     try {
+        const userId = req.user.userId;
         const budgetId = req.params.id;
-        await budgetService.deleteBudget(budgetId);
+        await budgetService.deleteBudget(userId, budgetId);
         res.json({ message: "Budget deleted successfully" });
     } catch (error) {
         res.status(400).json({ error: error.message });

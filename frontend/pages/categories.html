@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrackFinan | Categorías</title>
+    <link rel="stylesheet" href="../assets/css/variables.css" />
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+    <link rel="stylesheet" href="../assets/css/layout.css" />
+    <link rel="stylesheet" href="../assets/css/pages.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">TrackFinan</div>
+        <nav class="nav">
+          <a class="nav-link" href="dashboard.html">Dashboard</a>
+          <a class="nav-link" href="accounts.html">Cuentas</a>
+          <a class="nav-link" href="categories.html">Categorías</a>
+          <a class="nav-link" href="payment-methods.html">Métodos de pago</a>
+          <a class="nav-link" href="transactions.html">Transacciones</a>
+          <a class="nav-link" href="budgets.html">Presupuestos</a>
+          <a class="nav-link" href="reports.html">Reportes</a>
+        </nav>
+      </aside>
+      <main class="content">
+        <div class="container stack">
+          <header class="topbar">
+            <h1 class="hero-title">Categorías</h1>
+            <button id="logoutBtn" class="btn btn-danger" type="button">Salir</button>
+          </header>
+          <section class="card stack">
+            <h2>Nueva categoría</h2>
+            <form id="categoryForm" class="grid-2">
+              <input class="input" name="name" placeholder="Nombre" required />
+              <select class="select" name="transaction_type_id" id="transactionTypeSelect" required></select>
+              <button class="btn btn-primary" type="submit">Guardar</button>
+            </form>
+          </section>
+          <section class="card stack">
+            <h2>Listado</h2>
+            <div class="table-wrap">
+              <table class="table">
+                <thead><tr><th>ID</th><th>Nombre</th><th>Tipo</th></tr></thead>
+                <tbody id="categoriesTbody"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="../assets/js/app.js"></script>
+    <script type="module" src="../assets/js/pages/categories.js"></script>
+  </body>
+</html>

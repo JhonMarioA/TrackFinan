@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrackFinan | Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/variables.css" />
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+    <link rel="stylesheet" href="../assets/css/layout.css" />
+    <link rel="stylesheet" href="../assets/css/pages.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">TrackFinan</div>
+        <nav class="nav">
+          <a class="nav-link" href="dashboard.html">Dashboard</a>
+          <a class="nav-link" href="accounts.html">Cuentas</a>
+          <a class="nav-link" href="categories.html">Categorías</a>
+          <a class="nav-link" href="payment-methods.html">Métodos de pago</a>
+          <a class="nav-link" href="transactions.html">Transacciones</a>
+          <a class="nav-link" href="budgets.html">Presupuestos</a>
+          <a class="nav-link" href="reports.html">Reportes</a>
+        </nav>
+      </aside>
+      <main class="content">
+        <div class="container stack">
+          <header class="topbar">
+            <h1 class="hero-title">Dashboard</h1>
+            <button id="logoutBtn" class="btn btn-danger" type="button">Salir</button>
+          </header>
+          <section class="grid-3">
+            <article class="card kpi">
+              <span class="muted">Ingresos</span>
+              <strong id="incomeValue" class="kpi-value">-</strong>
+            </article>
+            <article class="card kpi">
+              <span class="muted">Gastos</span>
+              <strong id="expenseValue" class="kpi-value">-</strong>
+            </article>
+            <article class="card kpi">
+              <span class="muted">Balance (rango)</span>
+              <strong id="balanceValue" class="kpi-value">-</strong>
+            </article>
+          </section>
+          <section class="grid-2">
+            <article class="card stack">
+              <h2>Presupuestos</h2>
+              <ul id="budgetStatusList" class="stack"></ul>
+            </article>
+            <article class="card stack">
+              <h2>Top gastos por categoría</h2>
+              <ul id="expensesByCategoryList" class="stack"></ul>
+            </article>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="../assets/js/app.js"></script>
+    <script type="module" src="../assets/js/pages/dashboard.js"></script>
+  </body>
+</html>
