@@ -1,128 +1,164 @@
-# Personal Finance and Expenses System
+# TrackFinan
 
-A database-driven personal finance tracking system focused on data integrity, relational design, and financial analytics.
+TrackFinan is a personal finance web application for tracking income, expenses, budgets, and account balances.
 
-## 1. General Project Approach
+This repository contains the backend API (Node.js + Express + MySQL) and a vanilla JavaScript frontend.
 
-System Type:
-Data-centric Information System
+## Project Status
 
-Main Objective:
-To design and implement a relational database that allows for the recording, organization, and analysis of personal financial transactions, ensuring data integrity, consistency, and scalability.
+TrackFinan is currently in Version 1 (V1).
 
-## 2. System Requirements
-### 2.1 Functional Requirements
+V1 is focused on:
+- A clean relational database design.
+- Core CRUD modules for finance management.
+- JWT authentication.
+- Basic reporting endpoints.
+- A functional multi-page frontend in HTML, CSS, and JavaScript.
 
-The system must allow users to:
+This is the first working version and it is expected to be improved in future iterations.
 
+## Main Features (V1)
 
-    Register users in the system.
+- User registration and login.
+- Account management.
+- Category management.
+- Payment method management.
+- Transaction management.
+- Budget management.
+- Reports:
+	- income vs expense
+	- expenses by category
+	- balance by date range
 
-    Create and manage multiple financial accounts per user.
+## Tech Stack
 
-    Record income and expense transactions.
+- Backend: Node.js, Express, MySQL (`mysql2`)
+- Auth: JWT (`jsonwebtoken`) + password hashing (`bcrypt`)
+- Frontend: HTML, CSS, vanilla JavaScript
+- Environment config: `dotenv`
 
-    Classify transactions by category.
+## Architecture
 
-    Associate transactions with accounts and payment methods.
+The backend follows a layered architecture:
 
-    View transaction history.
+Route -> Controller -> Service -> Repository -> Database
 
-    Calculate account balances.
+Main backend folders:
+- `src/routes`
+- `src/controllers`
+- `src/services`
+- `src/repositories`
+- `src/middlewares`
+- `src/config`
+- `src/utils`
 
-    Generate monthly income and expense reports.
+## API Overview
 
-    View expenses grouped by category.
+Base URL: `http://localhost:3000/api`
 
-    Maintain the integrity of financial data.
+Public endpoints:
+- `POST /auth/register`
+- `POST /auth/login`
 
+Protected endpoints (Bearer token required):
+- `GET/POST/PUT/DELETE /accounts`
+- `GET /accounts/account-types`
+- `GET /accounts/transaction-types`
+- `GET/POST/PUT/DELETE /categories`
+- `GET/POST/PUT/DELETE /payment-methods`
+- `GET/POST/PUT/DELETE /transactions`
+- `GET /transactions/filter`
+- `GET/POST/PUT/DELETE /budgets`
+- `GET /budgets/status`
+- `GET /reports/income-vs-expense`
+- `GET /reports/expenses-by-category?startDate&endDate`
+- `GET /reports/balance?startDate&endDate`
 
-### 2.2 Non-functional Requirements
+## Database
 
-    Data Integrity:
-    The system must guarantee consistency through primary keys, foreign keys, and constraints.
+Schema and constraints are defined in:
+- `docs/Initial_Script_MySQL_TrackFinan.sql`
 
-    Scalability:
-    The database must support the growth in transaction volume without performance degradation.
+ER model documentation:
+- `docs/er_model.md`
 
-    Security:
-    Passwords must be stored securely (hashed).
+Important V1 behavior:
+- Account balances are updated by SQL triggers on insert, update, and delete of transactions.
 
-    Performance: Frequent queries must be optimized using indexes.
+## Frontend
 
-    Maintainability:
-    The design must be standardized and allow for future extensions.
+Frontend source lives in `frontend/` as a multi-page app.
 
-    Usability:
-    The interface must be simple and understandable.
+Entry points:
+- `frontend/index.html`
+- `frontend/pages/*.html`
 
+## Getting Started
 
-## 3. System Modeling
-### 3.1 Conceptual Model (ER)
+### 1. Install dependencies
 
-Main Entities:
-
-    User
-
-    Account
-
-    Transaction
-
-    Category
-
-    Payment Method
-
-Relationships:
-
-    User has Accounts (1:N)
-
-    User performs Transactions (1:N)
-
-    Account records Transactions (1:N)
-
-    Category classifies Transactions (1:N)
-
-    Payment Method is used in Transactions (1:N)
-
-### 3.2 Logical (Relational) Model
-
-Main Tables:
-
-    users
-
-    accounts
-
-    categories
-
-    payment_methods
-
-    transactions
-
-## 4. Design Pattern 
-
-### Layered Architecture
-
-```sql
-Presentation (HTML / CSS / JS)
-        ↓
-Application Logic 
-        ↓
-Persistence Layer (MySQL)
-
+```bash
+npm install
 ```
 
-## 5. Main Use Cases
+### 2. Configure environment variables
 
-    1) Register user
+Create a `.env` file in the project root with:
 
-    2) Create financial account
+```env
+DB_HOST=localhost
+DB_USER=your_user
+DB_PASSWORD=your_password
+DB_NAME=TrackFinan_DB
+JWT_SECRET=your_jwt_secret
+PORT=3000
+```
 
-    3) Register income
+### 3. Create database schema
 
-    4) Register expenses
+Run the SQL script:
 
-    5) View balance
+- `docs/Initial_Script_MySQL_TrackFinan.sql`
 
-    6) Generate monthly report
+### 4. Run the app
 
-    7) View expenses by category
+Development:
+
+```bash
+npm run dev
+```
+
+Production:
+
+```bash
+npm start
+```
+
+Server URL:
+- `http://localhost:3000`
+
+## V1 Limitations
+
+- No automated test suite yet.
+- Basic error handling structure, but can be standardized further.
+- Reports are functional but limited to core financial summaries.
+- No multi-currency, bank integrations, or advanced analytics yet.
+
+## Future Improvements (Post-V1)
+
+- Add automated tests (unit and integration).
+- Improve validation and centralized error handling.
+- Add transfers between accounts.
+- Add advanced filters and richer dashboards/charts.
+- Add Docker setup for local development/deployment.
+- Improve CI/CD and deployment workflows.
+- Add stronger security measures (rate limiting, helmet, etc.).
+- Improve frontend UX/UI and add reusable components.
+- Migrate to a more modern frontend framework (React, Vue, etc.) if needed.
+- Add support for multi-currency and exchange rates.
+
+## Notes
+
+TrackFinan V1 prioritizes correctness and data integrity over advanced features.
+The project is intentionally designed to evolve step by step in future versions.
+
