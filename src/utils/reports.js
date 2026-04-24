@@ -2,6 +2,8 @@ const db = require('../config/db');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middlewares/auth.middleware');
+const { validateQuery } = require('../middlewares/validate.middleware');
+const { expensesByCategoryQuerySchema, balanceQuerySchema } = require('../schemas/reports.schema');
 
 
 // REPOSITORY 
@@ -130,9 +132,9 @@ const balance = async (req, res) => {
 
 router.use(auth);
 
-router.get('/expenses-by-category', expensesByCategory);
+router.get('/expenses-by-category', validateQuery(expensesByCategoryQuerySchema), expensesByCategory);
 router.get('/income-vs-expense', incomeVsExpense);
-router.get('/balance', balance);
+router.get('/balance', validateQuery(balanceQuerySchema), balance);
 
 module.exports = router;
 
