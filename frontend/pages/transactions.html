@@ -41,11 +41,26 @@
               <button class="btn btn-primary" type="submit">Guardar</button>
             </form>
           </section>
+          <section id="editTransactionCard" class="card stack hidden">
+            <h2>Editar transacción</h2>
+            <form id="editTransactionForm" class="grid-2">
+              <select class="select" name="account_id" id="editAccountSelect" required></select>
+              <select class="select" name="category_id" id="editCategorySelect" required></select>
+              <select class="select" name="payment_method_id" id="editPaymentMethodSelect" required></select>
+              <input class="input" name="amount" type="number" min="1" step="0.01" placeholder="Monto" required />
+              <input class="input" name="description" placeholder="Descripción" />
+              <div class="table-actions">
+                <button class="btn btn-primary" type="submit">Guardar cambios</button>
+                <button id="cancelEditTransactionBtn" class="btn btn-ghost" type="button">Cancelar</button>
+              </div>
+            </form>
+          </section>
           <section class="card stack">
             <h2>Listado</h2>
+            <p id="transactionsError" class="alert alert-error hidden"></p>
             <div class="table-wrap">
               <table class="table">
-                <thead><tr><th>ID</th><th>Cuenta</th><th>Categoría</th><th>Monto</th><th>Descripción</th></tr></thead>
+                <thead><tr><th>#</th><th>Cuenta</th><th>Categoría</th><th>Método</th><th>Monto</th><th>Descripción</th><th>Acciones</th></tr></thead>
                 <tbody id="transactionsTbody"></tbody>
               </table>
             </div>

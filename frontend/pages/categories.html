@@ -38,11 +38,22 @@
               <button class="btn btn-primary" type="submit">Guardar</button>
             </form>
           </section>
+          <section id="editCategoryCard" class="card stack hidden">
+            <h2>Editar categoría</h2>
+            <form id="editCategoryForm" class="grid-2">
+              <input class="input" name="name" placeholder="Nombre" required />
+              <div class="table-actions">
+                <button class="btn btn-primary" type="submit">Guardar cambios</button>
+                <button id="cancelEditCategoryBtn" class="btn btn-ghost" type="button">Cancelar</button>
+              </div>
+            </form>
+          </section>
           <section class="card stack">
             <h2>Listado</h2>
+            <p id="categoriesError" class="alert alert-error hidden"></p>
             <div class="table-wrap">
               <table class="table">
-                <thead><tr><th>ID</th><th>Nombre</th><th>Tipo</th></tr></thead>
+                <thead><tr><th>#</th><th>Nombre</th><th>Tipo</th><th>Acciones</th></tr></thead>
                 <tbody id="categoriesTbody"></tbody>
               </table>
             </div>

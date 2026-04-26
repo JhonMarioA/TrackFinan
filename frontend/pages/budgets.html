@@ -40,9 +40,29 @@
               <button class="btn btn-primary" type="submit">Guardar</button>
             </form>
           </section>
+          <section id="editBudgetCard" class="card stack hidden">
+            <h2>Editar presupuesto</h2>
+            <form id="editBudgetForm" class="grid-2">
+              <input class="input" name="amount" type="number" min="1" step="0.01" placeholder="Monto límite" required />
+              <div class="table-actions">
+                <button class="btn btn-primary" type="submit">Guardar cambios</button>
+                <button id="cancelEditBudgetBtn" class="btn btn-ghost" type="button">Cancelar</button>
+              </div>
+            </form>
+          </section>
           <section class="card stack">
             <h2>Estado de presupuestos</h2>
+            <p id="budgetsError" class="alert alert-error hidden"></p>
             <ul id="budgetStatusList" class="stack"></ul>
+          </section>
+          <section class="card stack">
+            <h2>Listado de presupuestos</h2>
+            <div class="table-wrap">
+              <table class="table">
+                <thead><tr><th>#</th><th>Categoría</th><th>Monto</th><th>Mes</th><th>Año</th><th>Acciones</th></tr></thead>
+                <tbody id="budgetsTbody"></tbody>
+              </table>
+            </div>
           </section>
         </div>
       </main>

@@ -33,19 +33,30 @@
           <section class="card stack">
             <h2>Filtros</h2>
             <form id="reportFilterForm" class="actions">
+              <select class="select" name="reportType" id="reportType" required>
+                <option value="all">Todos</option>
+                <option value="expenses-by-category">Gastos por categoría</option>
+                <option value="balance">Balance</option>
+                <option value="income-vs-expense">Ingresos vs gastos</option>
+              </select>
               <input class="input" type="date" name="startDate" required />
               <input class="input" type="date" name="endDate" required />
               <button class="btn btn-primary" type="submit">Aplicar</button>
+              <button id="refreshReportBtn" class="btn btn-ghost" type="button">Actualizar</button>
             </form>
           </section>
           <section class="grid-2">
-            <article class="card stack">
+            <article id="expensesCard" class="card stack">
               <h2>Gastos por categoría</h2>
               <ul id="expensesByCategoryList" class="stack"></ul>
             </article>
-            <article class="card stack">
+            <article id="balanceCard" class="card stack">
               <h2>Balance</h2>
               <p id="balanceResume" class="muted">Sin datos</p>
+            </article>
+            <article id="incomeVsExpenseCard" class="card stack">
+              <h2>Ingresos vs gastos</h2>
+              <p id="incomeVsExpenseResume" class="muted">Sin datos</p>
             </article>
           </section>
         </div>
